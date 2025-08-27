@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K2 Hariyali - Plant Order Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f3fff3;
+    }
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #2e7d32;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      background: #2e7d32;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #1b5e20;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      color: #d32f2f;
+    }
+    .add-btn {
+      margin-top: 10px;
+      background: #388e3c;
+    }
+  </style>
+</head>
+<body>
+  <header>🌿 K2 Hariyali - Order Panel</header>
+  <div class="container">
+    <h2>Place Your Plant Order</h2>
+    
+    <label>Customer Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label>Phone Number</label>
+    <input type="tel" id="phone" placeholder="Enter phone number">
+
+    <label>Address</label>
+    <textarea id="address" rows="3" placeholder="Enter delivery address"></textarea>
+
+    <h3>Select Plants</h3>
+    <div id="order-items"></div>
+    <button class="add-btn" onclick="addPlant()">➕ Add Plant</button>
+
+    <table id="orderTable">
+      <thead>
+        <tr>
+          <th>Plant</th>
+          <th>Rate (₹)</th>
+          <th>Qty</th>
+          <th>Total (₹)</th>
+        </tr>
+      </thead>
+      <tbody id="orderBody"></tbody>
+    </table>
+
+    <div class="total">Grand Total: ₹<span id="grandTotal">0</span></div>
+
+    <button onclick="sendOrder()">Send Order via WhatsApp</button>
+  </div>
+
+  <script>
+    const plants = [
+      {name: "Aloe Vera", price: 120},
+      {name: "Tulsi", price: 80},
+      {name: "Money Plant", price: 150},
+      {name: "Neem", price: 100},
+      {name: "Snake Plant", price: 200},
+      {name: "Rose", price: 90}
+      // you can add 100+ plants here
+    ];
+
+    let orders = [];
+
+    function addPlant() {
+      const container = document.getElementById("order-items");
+
+      let select = document.createElement("select");
+      select.innerHTML = `<option value="" disabled selected>--Choose Plant--</option>`;
+      plants.forEach(p => {
+        select.innerHTML += `<option value="${p.name}" data-price="${p.price}">${p.name} - ₹${p.price}</option>`;
+      });
+
+      let qty = document.createElement("input");
+      qty.type = "number";
+      qty.min = 1;
+      qty.value = 1;
+
+      select.onchange = () => updateOrders();
+      qty.oninput = () => updateOrders();
+
+      container.appendChild(select);
+      container.appendChild(qty);
+      container.appendChild(document.createElement("br"));
+      updateOrders();
+    }
+
+    function updateOrders() {
+      orders = [];
+      const selects = document.querySelectorAll("#order-items select");
+      const qtys = document.querySelectorAll("#order-items input");
+
+      selects.forEach((s, i) => {
+        if (s.value) {
+          let plant = plants.find(p => p.name === s.value);
+          let quantity = parseInt(qtys[i].value);
+          orders.push({
+            name: plant.name,
+            price: plant.price,
+            qty: quantity,
+            total: plant.price * quantity
+          });
+        }
+      });
+
+      renderTable();
+    }
+
+    function renderTable() {
+      const body = document.getElementById("orderBody");
+      body.innerHTML = "";
+      let grand = 0;
+
+      orders.forEach(o => {
+        body.innerHTML += `
+          <tr>
+            <td>${o.name}</td>
+            <td>₹${o.price}</td>
+            <td>${o.qty}</td>
+            <td>₹${o.total}</td>
+          </tr>`;
+        grand += o.total;
+      });
+
+      document.getElementById("grandTotal").innerText = grand;
+    }
+
+    function sendOrder() {
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const grandTotal = document.getElementById("grandTotal").innerText;
+
+      if (!name || !phone || !address || orders.length === 0) {
+        alert("⚠️ Please fill all details and add at least one plant.");
+        return;
+      }
+
+      let orderDetails = "";
+      orders.forEach(o => {
+        orderDetails += `🪴 ${o.name} - ₹${o.price} x ${o.qty} = ₹${o.total}%0A`;
+      });
+
+      const message = `🌿 *K2 Hariyali Order* 🌿%0A
+👤 Name: ${name}%0A
+📞 Phone: ${phone}%0A
+🏠 Address: ${address}%0A
+--------------------------%0A
+${orderDetails}
+💰 Grand Total: ₹${grandTotal}`;
+
+      const sellerNumber = "919693270736"; // replace with your WhatsApp number
+      const url = `https://wa.me/${sellerNumber}?text=${message}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
