@@ -81,6 +81,28 @@
       margin-top: 10px;
       background: #388e3c;
     }
+    a.cute-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    a.cute-btn:hover {
+      background: linear-gradient(135deg, #ff9eb5, #ff607f);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    a.cute-btn:active {
+      transform: scale(0.97);
+    }
   </style>
 </head>
 <body>
@@ -117,7 +139,7 @@
 
     <button onclick="sendOrder()">Send Order via WhatsApp</button>
   </div>
-
+<a href="index.html" class="cute-btn">Back</a>
   <script>
     const plants = [
       {name: "Aloe Vera", price: 120},
