@@ -3,35 +3,326 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beautiful Box</title>
+  <title>K2 Hariyali - Plant Order Panel</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      margin: 10px; padding: 5px;
       background: #00bf63;
     }
-
-    .box {
-      background: white;
-      color: #00bf63;
-      max-width: 500px;
-      width: 90%;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 15px;
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #2e7d32;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      background: #2e7d32;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #1b5e20;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      color: #d32f2f;
+    }
+    .add-btn {
+      margin: 10px 0;
+      padding: 8px;
+      background: #388e3c;
+      color: #fff;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    a.cute-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    a.cute-btn:hover {
+      background: linear-gradient(135deg, #ff9eb5, #ff607f);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    a.cute-btn:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="cute-btn">Back</a>
+  <br><br>
+  <header>🌿 K2 Hariyali - Order Panel</header>
+  <div class="container">
+    <h2>Place Your Plant Order</h2>
+    
+    <label>Customer Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label>Phone Number</label>
+    <input type="tel" id="phone" placeholder="Enter phone number">
+
+    <label>Address</label>
+    <textarea id="address" rows="3" placeholder="Enter delivery address"></textarea>
+
+    <h3>Select Plants</h3>
+    <div id="order-items"></div>
+    <button class="add-btn" onclick="addPlant()">➕ Add Plant</button>
+
+    <table id="orderTable">
+      <thead>
+        <tr>
+          <th>Plant</th>
+          <th>Rate (₹)</th>
+          <th>Qty</th>
+          <th>Total (₹)</th>
+        </tr>
+      </thead>
+      <tbody id="orderBody"></tbody>
+    </table>
+
+    <div class="total">Grand Total: ₹<span id="grandTotal">0</span></div>
+
+    <button onclick="sendOrder()">Send Order via WhatsApp</button>
+  </div>
+
+  <script>
+    const plantCategories = {
+      "Fruit Plants 🍎": [
+        {name: "Jamun", price: 40},
+        {name: "Sharifa (Sitafal)", price: 40},
+        {name: "Angoor", price: 40},
+        {name: "Kathal", price: 40},
+        {name: "Papaya", price: 30},
+        {name: "Kagzi Nimbu", price: 100},
+        {name: "Nimbu Hajana", price: 100},
+        {name: "Nimbu Gagan", price: 50},
+        {name: "Anar", price: 200},
+        {name: "Aam (Mango)", price: 150},
+        {name: "Chiku", price: 40},
+        {name: "Amrud (Guava)", price: 40},
+        {name: "Amla", price: 40},
+        {name: "Ber", price: 40},
+        {name: "Banana", price: 30}
+      ],
+      "Ornamental 🌸": [
+        {name: "Money Plant", price: 30},
+        {name: "Snake Plant", price: 40},
+        {name: "Dracaena", price: 50},
+        {name: "Syngonium", price: 40},
+        {name: "Delhi Palm", price: 50},
+        {name: "Wandering Jew", price: 40},
+        {name: "Croton", price: 50},
+        {name: "Christmas Tree", price: 120},
+        {name: "Purple Heart", price: 40},
+        {name: "Boat Lily", price: 40},
+        {name: "Moon Bank", price: 40},
+        {name: "Jade", price: 40},
+        {name: "Bamboo", price: 250},
+        {name: "Palm", price: 100},
+        {name: "Chandani", price: 40},
+        {name: "Rajlakshmi", price: 40},
+        {name: "Rose", price: 40},
+        {name: "Juhi", price: 40},
+        {name: "Sadabahar", price: 40},
+        {name: "Gulmehndi", price: 40},
+        {name: "Chameli", price: 40},
+        {name: "Raat Rani", price: 40},
+        {name: "Tagar (Bucha)", price: 40},
+        {name: "Tagar (5 Patti)", price: 40},
+        {name: "Bela", price: 40},
+        {name: "Aparajita", price: 20},
+        {name: "Kamal", price: 30},
+        {name: "Hibiscus", price: 40},
+        {name: "Madhumati", price: 50},
+        {name: "Bougainvillea", price: 60}
+      ],
+      "Medicinal 🌿": [
+        {name: "Punarnava", price: 40},
+        {name: "Touch Me Not", price: 30},
+        {name: "Mehndi", price: 20},
+        {name: "Adulsa", price: 40},
+        {name: "Curry Leaf", price: 30},
+        {name: "Ajwain", price: 30},
+        {name: "Methi (Fenugreek)", price: 30},
+        {name: "Dhaniya (Coriander)", price: 30},
+        {name: "Green Chilli Plant", price: 30},
+        {name: "Kalechi", price: 150},
+        {name: "Bay Leaf (Tejpatta)", price: 100},
+        {name: "Tomato", price: 30},
+        {name: "Tulsi", price: 30},
+        {name: "Neem", price: 30},
+        {name: "Peepal", price: 30},
+        {name: "Bel Patra", price: 30},
+        {name: "Patharchatta", price: 30},
+        {name: "Wagh Nakh", price: 30}
+      ]
+    };
+
+    let orders = [];
+
+    function addPlant() {
+      const container = document.getElementById("order-items");
+
+      let select = document.createElement("select");
+      select.innerHTML = `<option value="" disabled selected>--Choose Plant--</option>`;
+      
+      // Create optgroups
+      for (const category in plantCategories) {
+        let optgroup = document.createElement("optgroup");
+        optgroup.label = category;
+        plantCategories[category].forEach(p => {
+          optgroup.innerHTML += `<option value="${p.name}" data-price="${p.price}">${p.name} - ₹${p.price}</option>`;
+        });
+        select.appendChild(optgroup);
+      }
+
+      let qty = document.createElement("input");
+      qty.type = "number";
+      qty.min = 1;
+      qty.value = 1;
+
+      select.onchange = () => updateOrders();
+      qty.oninput = () => updateOrders();
+
+      container.appendChild(select);
+      container.appendChild(qty);
+      container.appendChild(document.createElement("br"));
+      updateOrders();
     }
 
-    .box:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    function updateOrders() {
+      orders = [];
+      const selects = document.querySelectorAll("#order-items select");
+      const qtys = document.querySelectorAll("#order-items input");
+
+      selects.forEach((s, i) => {
+        if (s.value) {
+          let plant;
+          for (const category in plantCategories) {
+            plant = plantCategories[category].find(p => p.name === s.value);
+            if (plant) break;
+          }
+          let quantity = parseInt(qtys[i].value);
+          orders.push({
+            name: plant.name,
+            price: plant.price,
+            qty: quantity,
+            total: plant.price * quantity
+          });
+        }
+      });
+
+      renderTable();
     }
 
-    .box h1 {
+    function renderTable() {
+      const body = document.getElementById("orderBody");
+      body.innerHTML = "";
+      let grand = 0;
+
+      orders.forEach(o => {
+        body.innerHTML += `
+          <tr>
+            <td>${o.name}</td>
+            <td>₹${o.price}</td>
+            <td>${o.qty}</td>
+            <td>₹${o.total}</td>
+          </tr>`;
+        grand += o.total;
+      });
+
+      document.getElementById("grandTotal").innerText = grand;
+    }
+
+    function sendOrder() {
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const grandTotal = document.getElementById("grandTotal").innerText;
+
+      if (!name || !phone || !address || orders.length === 0) {
+        alert("⚠️ Please fill all details and add at least one plant.");
+        return;
+      }
+
+      let orderDetails = "";
+      orders.forEach(o => {
+        orderDetails += `🪴 ${o.name} - ₹${o.price} x ${o.qty} = ₹${o.total}%0A`;
+      });
+
+      const message = `🌿 *K2 Hariyali Order* 🌿%0A
+👤 Name: ${name}%0A
+📞 Phone: ${phone}%0A
+🏠 Address: ${address}%0A
+--------------------------%0A
+${orderDetails}
+💰 Grand Total: ₹${grandTotal}`;
+
+      const sellerNumber = "919693720736"; // Replace with your WhatsApp number
+      const url = `https://wa.me/${sellerNumber}?text=${message}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
       
