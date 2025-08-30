@@ -146,97 +146,39 @@
   </div>
 
   <script>
-    const plantCategories = {
-      [
-        {name: "Jamun", price: 40},//c
-        {name: "Sharifa (Sitafal)", price: 40},//c
-         {name: "sahtut", price: 30},
-        {name: "Angoor", price: 40},
-        {name: "Kathal", price: 40},
-         {name: "kadam", price: 30},
-        {name: "Papaya", price: 40},//c
-        {name: "Kagzi Nimbu", price: 100},
-        {name: "Kagzi Nimbu", price: 150},
-        {name: "Nimbu Hajana 1", price: 100},
-        {name: "Nimbu Hajana 2", price: 150},
-        {name: "Nimbu Gagan", price: 100},
-        {name: "Anar", price: 180},
-              {name: "Anar", price: 50},
-        {name: "Aam (Mango) 1", price: 200},
-              {name: "Aam (Mango) 2", price: 250},
-              {name: "Aam (Mango) 3", price: 300},
-        {name: "Chiku 1", price: 150},
-           {name: "Chiku 2", price: 200},
-        {name: "Amrud (Guava) 1", price: 40},
-           {name: "Amrud (guava) 2", price: 100},
-        {name: "Amla", price: 30},//c
-        {name: "Ber", price: 40},
-        {name: "Banana", price: 50}, //c
-           {name: "Spider plant", price: 30},
-           {name: "Alternanthera", price: 30},
-        {name: "Money Plant", price: 30}, //c
-        {name: "Snake Plant", price: 30}, //
-        {name: "Dracaena", price: 40}, //
-        {name: "Syngonium", price: 40}, //c
-        {name: "Delhi Palm", price: 50},
-        {name: "Wandering Jew", price: 50},//
-        {name: "Croton", price: 70}, //c
-        {name: "Christmas Tree", price: 120}, //c
-        {name: "Purple Heart", price: 40}, //c
-        {name: "Boat Lily", price: 50}, //c
-        {name: "Morpankh", price: 120}, //c
-        {name: "Jade", price: 40},//c
-        {name: "Bamboo", price: 250}, 
-        {name: "Palm", price: 120}, //
-        {name: "Chandani", price: 40}, //
-        {name: "Rajlakshmi", price: 20}, //
-        {name: "Rose", price: 40}, //
-        {name: "Juhi", price: 20},//
-        {name: "Sadabahar", price: 30},//
-        {name: "Gulmehndi", price: 30},//
-        {name: "Chameli", price: 20},//
-        {name: "Raat Rani", price: 20},//
-        {name: "Tagar (gucha)", price: 30},//
-        {name: "Tagar (5 Patti)", price: 30},//
-        {name: "Beli", price: 30},//
-        {name: "Aparajita 1", price: 20},//
-         {name: "Aparajita 2", price: 40},//
-        {name: "Kamal", price: 20},//
-        {name: "Hibiscus 1", price: 30},
-         {name: "Hibiscus 2", price: 40},
-        {name: "Madhumati", price: 120},//
-        {name: "Bougainvillea", price: 50},//
-         {name: "genda (Marigold)", price: 30},//
-         {name: "Daffodil", price: 40},//
-         {name: "trumpet", price: 40},
-         {name: "Almanda", price: 50},//
-           {name: "harsingar", price: 20},//
-           {name: "Akelifa", price: 30},
-           {name: "paan", price: 30},
-           {name: "Shammi", price: 40},
-           {name: "Aawla", price: 30},
-           {name: "banana", price: 50},
-        {name: "Touch Me Not", price: 30},//c
-        {name: "Mehndi", price: 20},
-        {name: "Curry Leaf", price: 30},//
-        {name: "Ajwain", price: 30},//
-        {name: "lemongrass", price: 50},//
-        {name: "Mint", price: 30},//
-        {name: "Dhaniya (Coriander)", price: 40},
-        {name: "Green Chilli Plant", price: 30},
-        {name: "elaichi", price: 50},
-        {name: "Bay Leaf (Tejpatta)", price: 100},//c
-        {name: "Tulsi", price: 30}, //c
-        {name: "Neem", price: 20}, //c
-        {name: "Peepal", price: 20}, //c
-        {name: "Bel Patra", price: 30}, //c
-        {name: "Patharchatta", price: 30}, //c
-         {name: "Sugar plant", price: 30}, //c
-         {name: "giloy", price: 40},
-           {name: "Aloevera", price: 40},
-           {name: "all spices", price: 150}
-      ]
-    };
+    // Flat list of plants
+    const plants = [
+      {name: "Jamun", price: 40},
+      {name: "Sharifa (Sitafal)", price: 40},
+      {name: "Sahtut", price: 30},
+      {name: "Angoor", price: 40},
+      {name: "Kathal", price: 40},
+      {name: "Kadam", price: 30},
+      {name: "Papaya", price: 40},
+      {name: "Kagzi Nimbu (Small)", price: 100},
+      {name: "Kagzi Nimbu (Big)", price: 150},
+      {name: "Anar", price: 180},
+      {name: "Chiku", price: 150},
+      {name: "Amrud (Guava)", price: 40},
+      {name: "Amla", price: 30},
+      {name: "Banana", price: 50},
+      {name: "Money Plant", price: 30},
+      {name: "Snake Plant", price: 30},
+      {name: "Syngonium", price: 40},
+      {name: "Croton", price: 70},
+      {name: "Christmas Tree", price: 120},
+      {name: "Purple Heart", price: 40},
+      {name: "Jade", price: 40},
+      {name: "Rose", price: 40},
+      {name: "Tulsi", price: 30},
+      {name: "Neem", price: 20},
+      {name: "Peepal", price: 20},
+      {name: "Bel Patra", price: 30},
+      {name: "Patharchatta", price: 30},
+      {name: "Sugar Plant", price: 30},
+      {name: "Giloy", price: 40},
+      {name: "Aloevera", price: 40}
+    ];
 
     let orders = [];
 
@@ -245,16 +187,9 @@
 
       let select = document.createElement("select");
       select.innerHTML = `<option value="" disabled selected>--Choose Plant--</option>`;
-      
-      // Create optgroups
-      for (const category in plantCategories) {
-        let optgroup = document.createElement("optgroup");
-        optgroup.label = category;
-        plantCategories[category].forEach(p => {
-          optgroup.innerHTML += `<option value="${p.name}" data-price="${p.price}">${p.name} - ₹${p.price}</option>`;
-        });
-        select.appendChild(optgroup);
-      }
+      plants.forEach(p => {
+        select.innerHTML += `<option value="${p.name}" data-price="${p.price}">${p.name} - ₹${p.price}</option>`;
+      });
 
       let qty = document.createElement("input");
       qty.type = "number";
@@ -277,11 +212,7 @@
 
       selects.forEach((s, i) => {
         if (s.value) {
-          let plant;
-          for (const category in plantCategories) {
-            plant = plantCategories[category].find(p => p.name === s.value);
-            if (plant) break;
-          }
+          let plant = plants.find(p => p.name === s.value);
           let quantity = parseInt(qtys[i].value);
           orders.push({
             name: plant.name,
@@ -331,6 +262,21 @@
       });
 
       const message = `🌿 *K2 Hariyali Order* 🌿%0A
+👤 Name: ${name}%0A
+📞 Phone: ${phone}%0A
+🏠 Address: ${address}%0A
+--------------------------%0A
+${orderDetails}
+💰 Grand Total: ₹${grandTotal}`;
+
+      const sellerNumber = "919693720736"; // Replace with your WhatsApp number
+      const url = `https://wa.me/${sellerNumber}?text=${message}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
+const message = `🌿 *K2 Hariyali Order* 🌿%0A
 👤 Name: ${name}%0A
 📞 Phone: ${phone}%0A
 🏠 Address: ${address}%0A
