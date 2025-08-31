@@ -12,6 +12,33 @@
          margin:10px;
          padding:5px;
          background:#00bf63;
+             }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    footer .footer-icons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    footer .footer-icons a {
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    footer .footer-icons a:hover {
+      color: #222;
+    }
      }
       .add-btn {
       margin: 10px;
@@ -44,5 +71,121 @@
 <body>
     <a href="index.html" class="cute-btn">Back</a>
   <p> OUR CONTACT US PAGE COMING SOON...</p>
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #00bf63;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 1rem;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: #fff;
+      color: #333;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h2 {
+      margin: 10px 0 5px;
+      font-size: 1.3rem;
+      color: #00bf63;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .icons {
+      display: flex;
+
+<body>
+
+  <header>
+    <h1>Contact Us</h1>
+    <p>Feel free to reach out to K2 Hariyali team for queries, feedback or orders</p>
+  </header>
+
+  <section class="contact-container">
+    <!-- Kanak -->
+    <div class="card">
+      <h2>Kanak</h2>
+      <h3>Chairman</h3>
+      <div class="icons">
+        <a href="tel:+911234567890"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://wa.me/911234567890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <!-- Kevin -->
+    <div class="card">
+      <h2>Kevin James Dawson</h2>
+      <h3>Salesman</h3>
+      <div class="icons">
+        <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://wa.me/919876543210" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <!-- Rajnish -->
+    <div class="card">
+      <h2>Rajnish Kr.</h2>
+      <h3>Frontend Designer</h3>
+      <div class="icons">
+        <a href="https://instagram.com/yourusername" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="mailto:someone@example.com"><i class="fa-regular fa-envelope"></i></a>
+        <a href="tel:+910000000000"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://wa.me/910000000000" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Connect with K2 Hariyali</p>
+    <div class="footer-icons">
+      <a href="https://instagram.com/yourusername" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="mailto:someone@example.com"><i class="fa-regular fa-envelope"></i></a>
+    </div>
+  </footer>
+
+</body>
+</html>
+
 </body>
 
