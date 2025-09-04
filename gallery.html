@@ -1,47 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <title>K2 Hariyali</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>11 Plants that Grow in Water | K2 Hariyali</title>
+  <style>
+    :root{
+      --brand:#00bf63; /* K2 Hariyali green */
+      --brand-2:#0f8f52;
+      --bg:#f6fff9;
+      --text:#17301c;
+      --card:#ffffff;
+      --muted:#5f7c6b;
+      --ring:rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,var(--bg),#fff);color:var(--text)}
+    header{
+      position:sticky;top:0;z-index:10;
+      backdrop-filter:saturate(1.2) blur(6px);
+      background:linear-gradient(180deg,rgba(246,255,249,.9),rgba(246,255,249,.6));
+      border-bottom:1px solid var(--ring);
+    }
+    .wrap{max-width:1100px;margin:auto;padding:18px}
+    .title{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-badge{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 120deg,var(--brand),#43e28c 40%,#7fffd4 70%);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,191,99,.25)}
+    .logo-badge span{font-weight:800;color:white}
+    h1{font-size:clamp(18px,2.8vw,28px);margin:0}
+    .subtitle{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .input, select, button{border:1px solid var(--ring);border-radius:12px;padding:10px 12px;font:inherit;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.03)}
+    .input{flex:1 1 260px}
+    .btn{cursor:pointer;transition:.2s ease;display:inline-flex;gap:8px;align-items:center}
+    .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
+    .btn.primary:hover{filter:brightness(.95)}
+    .btn.ghost{background:#fff}
+    .btn.ghost:hover{background:#f4fff8}
+
+    .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
+    .card{grid-column:span 6;background:var(--card);border:1px solid var(--ring);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.05);padding:14px}
+    @media (min-width:800px){.card{grid-column:span 4}}
+    @media (min-width:1040px){.card{grid-column:span 3}}
+
+    .chip{display:inline-block;padding:4px 10px;border-radius:999px;background:#f4fff8;border:1px solid var(--ring);font-size:12px;margin-bottom:8px;color:var(--brand-2)}
+    .plant-title{margin:0 0 6px;font-size:18px}
+    .plant-hindi{margin:0 0 8px;color:var(--muted);font-weight:600}
+    ul{margin:6px 0 0 18px;padding:0}
+    li{margin:4px 0}
+
+    /* table section */
+    .table-wrap{margin-top:26px;background:var(--card);border:1px solid var(--ring);border-radius:16px;overflow:auto}
+    table{border-collapse:collapse;width:100%;min-width:760px}
+    th,td{padding:12px 14px;border-bottom:1px solid #eef4ef;vertical-align:top}
+    thead th{position:sticky;top:0;background:#f4fff8;border-bottom:1px solid #def2e7}
+    tbody tr:hover{background:#fafdfa}
+    .num{width:36px;color:#6b8a78}
+
+    footer{padding:28px 0 50px;color:var(--muted);text-align:center}
+
+    .pill{font-size:12px;border-radius:999px;padding:4px 8px;border:1px solid var(--ring);background:#fff;color:#2c503f}
+
+    .empty{padding:28px;text-align:center;color:var(--muted)}
+  </style>
 </head>
- <style>
-     body{
-         margin:10px;
-         padding:5px;
-         background:#00bf63;
-     }
-      .add-btn {
-      margin: 10px;
-      padding: 5px;
-      background: #388e3c;
-    }
-    a.cute-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #ff7eb3, #ff758c);
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 50px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-    }
-
-    a.cute-btn:hover {
-      background: linear-gradient(135deg, #ff9eb5, #ff607f);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }
-
-    a.cute-btn:active {
-      transform: scale(0.97);
-    }
-     </style>
 <body>
-     <a href="index.html" class="cute-btn">Back</a>
-  <p> OUR GALLERY PAGE COMING SOON...</p>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div class="logo">
+          <div class="logo-badge" aria-hidden="true"><span>🌿</span></div>
+          <div>
+            <h1>11 Plants that Grow in Water · <span lang="hi">पानी में उगने वाले 11 पौधे</span></h1>
+            <p class="subtitle">K2 Hariyali — Bilingual notes (English + Hindi), searchable & printable</p>
+          </div>
+        </div>
+        <a class="pill" href="#table" title="Jump to table">Go to Table ↓</a>
+      </div>
+
+      <div class="toolbar">
+        <input id="q" class="input" placeholder="Search (English or Hindi)…" />
+        <select id="view">
+          <option value="both">Show: English + Hindi</option>
+          <option value="en">Show: English only</option>
+          <option value="hi">Show: Hindi only</option>
+        </select>
+        <button class="btn ghost" id="copy">Copy Table</button>
+        <button class="btn primary" id="print">Print / Save PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Cards / quick view -->
+    <section id="cards" class="cards" aria-label="Plant cards"></section>
+
+    <!-- Full bilingual table -->
+    <section id="table" class="table-wrap" aria-label="Bilingual notes table">
+      <table>
+        <thead>
+          <tr>
+            <th class="num">#</th>
+            <th>Plant (English)</th>
+            <th>Plant (Hindi)</th>
+            <th>Key Notes (English)</th>
+            <th>मुख्य बिंदु (Hindi)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div id="empty" class="empty" hidden>No results. Try a different keyword.</div>
+    </section>
+  </main>
+
+  <footer>
+    Made with ♥ for <strong>K2 Hariyali</strong>. Tip: Use the Search box to filter plants instantly.
+  </footer>
+
+  <script>
+    const PLANTS = [
+      {
+        en: { name: 'Begonia', notes: 'Grows well in water jars; decorative and low-maintenance.' },
+        hi: { name: 'बेगोनिया', notes: 'पानी से भरे जार में अच्छी तरह बढ़ता है; सजावट के लिए सुंदर और कम देखभाल वाला।' },
+        type: 'foliage'
+      },
+      {
+        en: { name: 'Lucky Bamboo', notes: 'Symbol of good luck; grows easily in water with pebbles.' },
+        hi: { name: 'लकी बांस', notes: 'शुभता का प्रतीक; कंकड़ों के साथ पानी में आसानी से बढ़ता है।' },
+        type: 'bamboo'
+      },
+      {
+        en: { name: 'Spathiphyllum (Peace Lily)', notes: 'Air-purifying plant; thrives in water jars.' },
+        hi: { name: 'स्पैटिफिलम (पीस लिली)', notes: 'हवा शुद्ध करने वाला पौधा; पानी के जार में अच्छी तरह उगता है।' },
+        type: 'air-purifier'
+      },
+      {
+        en: { name: 'Hedera Geranium', notes: 'Attractive trailing plant; grows fast in water.' },
+        hi: { name: 'हेडरा जेरेनियम', notes: 'लटकने वाला आकर्षक पौधा; पानी में तेजी से बढ़ता है।' },
+        type: 'trailing'
+      },
+      {
+        en: { name: 'Pothos (Money Plant)', notes: 'Very popular indoor plant; grows quickly in water.' },
+        hi: { name: 'पाथोस / मनी प्लांट', notes: 'बहुत लोकप्रिय इनडोर पौधा; पानी में तेजी से बढ़ता है।' },
+        type: 'vining'
+      },
+      {
+        en: { name: 'Mint', notes: 'Aromatic herb; grows fast in water; useful for cooking.' },
+        hi: { name: 'पुदीना', notes: 'सुगंधित जड़ी-बूटी; पानी में तेजी से बढ़ती है; खाने में उपयोगी।' },
+        type: 'herb'
+      },
+      {
+        en: { name: 'Hedera Ivy', notes: 'Beautiful trailing plant; grows well in water.' },
+        hi: { name: 'हेडरा आइवी', notes: 'सुंदर लटकने वाला पौधा; पानी में अच्छी तरह उगता है।' },
+        type: 'trailing'
+      },
+      {
+        en: { name: 'Peperomia', notes: 'Small decorative plant; easy to grow in water.' },
+        hi: { name: 'पेपरोमिया', notes: 'छोटा सजावटी पौधा; पानी में आसानी से उगता है।' },
+        type: 'compact'
+      },
+      {
+        en: { name: 'Philodendrons', notes: 'Indoor-friendly; grows well in jars with water.' },
+        hi: { name: 'फिलोडेंड्रॉन', notes: 'घर के अंदर रखने योग्य; पानी वाले जार में अच्छी तरह उगता है।' },
+        type: 'vining'
+      },
+      {
+        en: { name: 'Alocasias', notes: 'Attractive foliage plant; survives well in water.' },
+        hi: { name: 'एलोकैसिया', notes: 'सुंदर पत्तों वाला पौधा; पानी में आसानी से जीवित रहता है।' },
+        type: 'foliage'
+      },
+      {
+        en: { name: 'Liriope', notes: 'Grass-like plant; thrives in water-filled containers.' },
+        hi: { name: 'लिरियोपे', notes: 'घास जैसा पौधा; पानी से भरे बर्तनों में खूब फलता-फूलता है।' },
+        type: 'grass-like'
+      }
+    ];
+
+    const qs = (s, el=document) => el.querySelector(s);
+    const qsa = (s, el=document) => [...el.querySelectorAll(s)];
+
+    const tbody = qs('#tbody');
+    const cards = qs('#cards');
+    const search = qs('#q');
+    const viewSel = qs('#view');
+    const emptyState = qs('#empty');
+
+    function render(list){
+      // Render Table
+      tbody.innerHTML = '';
+      list.forEach((p, i)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="num">${i+1}</td>
+          <td>${p.en.name}</td>
+          <td lang="hi">${p.hi.name}</td>
+          <td>${p.en.notes}</td>
+          <td lang="hi">${p.hi.notes}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      emptyState.hidden = list.length !== 0;
+
+      // Render Cards
+      cards.innerHTML = '';
+      list.forEach(p=>{
+        const el = document.createElement('article');
+        el.className = 'card';
+        el.innerHTML = `
+          <span class="chip">${p.type}</span>
+          <h3 class="plant-title">${p.en.name}</h3>
+          <p class="plant-hindi" lang="hi">${p.hi.name}</p>
+          <ul class="en"><li>${p.en.notes}</li></ul>
+          <ul class="hi" lang="hi"><li>${p.hi.notes}</li></ul>
+        `;
+        cards.appendChild(el);
+      });
+      applyView();
+    }
+
+    function applyView(){
+      const mode = viewSel.value; // both | en | hi
+      const showEN = mode !== 'hi';
+      const showHI = mode !== 'en';
+      qsa('.en').forEach(n => n.style.display = showEN ? '' : 'none');
+      qsa('.hi').forEach(n => n.style.display = showHI ? '' : 'none');
+      // In table, toggle columns 3 & 5 (notes) and 2 & 4 (names)
+      const table = qs('table');
+      const colIdx = { nameHi:2, notesEn:3, notesHi:4 };
+      qsa('tbody tr').forEach(tr=>{
+        [...tr.children].forEach((td, idx)=>{
+          if(idx===1) td.style.display = showEN ? '' : 'none'; // name EN
+          if(idx===2) td.style.display = showHI ? '' : 'none'; // name HI
+          if(idx===3) td.style.display = showEN ? '' : 'none'; // notes EN
+          if(idx===4) td.style.display = showHI ? '' : 'none'; // notes HI
+        })
+      });
+      // header
+      qsa('thead th').forEach((th, idx)=>{
+        if(idx===1) th.style.display = showEN ? '' : 'none';
+        if(idx===2) th.style.display = showHI ? '' : 'none';
+        if(idx===3) th.style.display = showEN ? '' : 'none';
+        if(idx===4) th.style.display = showHI ? '' : 'none';
+      });
+    }
+
+    function filter(){
+      const q = search.value.trim().toLowerCase();
+      if(!q) return render(PLANTS);
+      const list = PLANTS.filter(p=>
+        [p.en.name,p.hi.name,p.en.notes,p.hi.notes].join(' ').toLowerCase().includes(q)
+      );
+      render(list);
+    }
+
+    function copyTable(){
+      const rows = [['#','Plant (English)','Plant (Hindi)','Key Notes (English)','मुख्य बिंदु (Hindi)']];
+      qsa('#tbody tr').forEach(tr=>{
+        rows.push([...tr.children].map(td=>td.innerText));
+      });
+      const text = rows.map(r=>r.join('\t')).join('\n');
+      navigator.clipboard.writeText(text).then(()=>{
+        const btn = qs('#copy');
+        const old = btn.textContent; btn.textContent = 'Copied!';
+        setTimeout(()=>btn.textContent=old,1200);
+      });
+    }
+
+    // listeners
+    search.addEventListener('input', filter);
+    viewSel.addEventListener('change', applyView);
+    qs('#print').addEventListener('click', ()=>window.print());
+    qs('#copy').addEventListener('click', copyTable);
+
+    // first render
+    render(PLANTS);
+  </script>
 </body>
+</html>
