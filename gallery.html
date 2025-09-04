@@ -82,7 +82,7 @@
       <div class="actions">
         <button class="btn ghost" id="shuffleBtn" title="Shuffle facts">🔀 Shuffle</button>
         <button class="btn secondary" id="copyBtn" title="Copy visible facts">📋 Copy</button>
-        <button class="btn" id="exportBtn" title="Download JSON">⬇️ Export</button>
+       
         <button class="btn red" id="clearBtn" title="Clear filters">✖️ Clear</button>
       </div>
     </div>
@@ -363,15 +363,7 @@
       copyText(lines.join('\n'));
     });
 
-    exportBtn.addEventListener('click', () => {
-      const data = JSON.stringify(getFiltered(), null, 2);
-      const blob = new Blob([data], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'k2-hariyali-plant-gk.json'; a.click();
-      URL.revokeObjectURL(url);
-    });
-
+   
     clearBtn.addEventListener('click', () => {
       search.value = '';
       category.value = 'All';
