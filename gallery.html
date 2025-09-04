@@ -280,7 +280,7 @@
     const clearBtn = document.getElementById('clearBtn');
 
     // Category list
-    const categories = ['All', ...new Set(FACTS.map(f => f.c))].sort();
+    const categories = ['Choose topic', ...new Set(FACTS.map(f => f.c))].sort();
     category.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
 
     // Render cards with copy button
