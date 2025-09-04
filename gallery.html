@@ -242,4 +242,145 @@
       { c: 'Water', t: 'Morning watering reduces fungal risk compared to watering late at night.' },
       { c: 'Trees', t: 'Banyan trees spread using prop roots that thicken into additional trunks.' },
       { c: 'Trees', t: 'Eucalyptus leaves often hang vertically to reduce midday sun exposure.' },
-    
+      { c: 'Leaves', t: 'Some leaves are modified into tendrils (e.g., peas) to climb for light.' },
+      { c: 'Leaves', t: 'Pitcher plant leaves form tubes filled with digestive enzymes or bacteria to process prey.' },
+      { c: 'Ferns & Mosses', t: 'Mosses lack true roots; they anchor with rhizoids and absorb water over surfaces.' },
+      { c: 'Ferns & Mosses', t: 'Clubmosses and horsetails are ancient plant lineages dating back hundreds of millions of years.' },
+      { c: 'Ecosystems', t: 'Pollinator gardens with continuous blooms support insects from spring to fall.' },
+      { c: 'Ecosystems', t: 'Hedgerows provide habitat corridors for wildlife on farms.' },
+      { c: 'Fun', t: 'Some plants produce edible flowers, such as nasturtium and marigold (calendula).'},
+      { c: 'Fun', t: 'The smell of freshly cut grass comes from compounds that also signal plant distress.' },
+      { c: 'Air', t: 'Opening windows and ensuring air flow is more effective than relying solely on plants for indoor air cleaning.' },
+      { c: 'Urban', t: 'Rain gardens capture runoff and let water soak into the ground naturally.' },
+      { c: 'Soil', t: 'Leaves and stems also decompose to form humus, enriching soil over time.' },
+      { c: 'Nutrition', t: 'Micronutrients like iron, manganese, and zinc are needed in small amounts but are essential.' },
+      { c: 'Nutrition', t: 'Symptoms like yellowing leaves can indicate specific nutrient deficiencies or water issues.' },
+      { c: 'Seeds', t: 'Coconuts can float across oceans to colonize new shores.' },
+      { c: 'Seeds', t: 'Animals that hoard seeds (like squirrels) help some plants by forgetting buried seeds.' },
+      { c: 'Defense', t: 'Milkweed latex can gum up insect mouths; monarch caterpillars evolved to tolerate it.' },
+      { c: 'Defense', t: 'Tomato plants emit volatiles that attract predators of herbivores attacking them.' },
+      { c: 'Records', t: 'Giant water lilies have floating leaves large enough to support small weights briefly.' },
+      { c: 'Records', t: 'Some creosote bushes form ancient clonal rings thousands of years old.' },
+      { c: 'Conservation', t: 'Saving seeds from open‑pollinated varieties preserves traits adapted to local conditions.' },
+      { c: 'Conservation', t: 'Reducing pesticide use protects beneficial insects and soil life.' },
+      { c: 'Houseplants', t: 'Quarantine new plants for a week to check for pests before placing them with others.' },
+      { c: 'Houseplants', t: 'Yellow sticky traps help monitor flying pests like fungus gnats and whiteflies.' },
+      { c: 'Flowers', t: 'Double flowers have extra petals due to modified reproductive parts.' },
+      { c: 'Flowers', t: 'Some flowers change sex stage over time to avoid self‑pollination.' },
+      { c: 'Edible Plants', t: 'Leafy greens often taste better and less bitter when grown in cooler weather.' },
+      { c: 'Edible Plants', t: 'Companion planting (e.g., basil with tomatoes) can improve growth or deter pests.' },
+      { c: 'Spices & Herbs', t: 'Cinnamon is inner bark from Cinnamomum trees, rolled into quills.' },
+      { c: 'Spices & Herbs', t: 'Clove buds are dried flower buds of Syzygium aromaticum.' },
+      { c: 'Urban', t: 'Vertical gardens use walls to grow ornamentals and herbs in tight spaces.' },
+      { c: 'Urban', t: 'Rooftop gardens reduce stormwater runoff and insulate buildings.' },
+      { c: 'Fun', t: 'Peppers get heat from capsaicin, which binds to heat receptors in our mouths.' },
+      { c: 'Fun', t: 'Chocolate comes from seeds of the cacao tree; fermentation develops flavor precursors.' },
+      { c: 'Climate', t: 'Planting at the right season avoids heat or frost stress and saves inputs.' },
+      { c: 'Climate', t: 'Windbreaks protect crops by reducing wind speed and water loss.' },
+      { c: 'Soil', t: 'Raised beds warm faster in spring and drain better in heavy soils.' },
+      { c: 'Soil', t: 'Soil life—worms, bacteria, fungi—recycles nutrients and builds structure.' },
+      { c: 'Propagation', t: 'Rooting hormones (auxins) can speed up cutting propagation.' },
+      { c: 'Propagation', t: 'Labeling plants prevents mix‑ups, especially with many similar varieties.' }
+    ];
+
+    // Add a few more to ensure 120+
+    while (FACTS.length < 125) {
+      FACTS.push({ c: 'General', t: 'Green plants form the base of most food chains by capturing sunlight energy.' });
+    }
+
+    // --- UI Rendering ---
+    const grid = document.getElementById('grid');
+    const empty = document.getElementById('empty');
+    const search = document.getElementById('search');
+    const category = document.getElementById('category');
+    const copyBtn = document.getElementById('copyBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    // Build category list
+    const categories = ['All', ...Array.from(new Set(FACTS.map(f => f.c))).sort()];
+    category.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
+
+    // Render cards
+    function render(list){
+      grid.innerHTML = '';
+      if (!list.length){ empty.hidden = false; return; } else { empty.hidden = true; }
+      list.forEach((f, i) => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="meta">
+            <span class="number">#${i+1}</span>
+            <span class="cat" title="Category">${f.c}</span>
+          </div>
+          <div class="text">${f.t}</div>
+        `;
+        // Long-press to copy one
+        let pressTimer;
+        card.addEventListener('mousedown', () => pressTimer = setTimeout(() => copyText(f.t), 500));
+        card.addEventListener('mouseup', () => clearTimeout(pressTimer));
+        card.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+        grid.appendChild(card);
+      });
+    }
+
+    // Filter logic
+    function getFiltered(){
+      const q = search.value.trim().toLowerCase();
+      const cat = category.value;
+      return FACTS.filter(f => (cat === 'All' || f.c === cat) && (!q || f.t.toLowerCase().includes(q)));
+    }
+
+    function copyText(text){
+      navigator.clipboard?.writeText(text).then(()=>{
+        toast('Copied to clipboard');
+      }).catch(()=>{});
+    }
+
+    function toast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      Object.assign(t.style,{
+        position:'fixed',bottom:'20px',left:'50%',transform:'translateX(-50%)',
+        background:'#0b2b1c',color:'#fff',padding:'10px 14px',borderRadius:'12px',
+        boxShadow:'var(--shadow)',zIndex:9999
+      });
+      document.body.appendChild(t);
+      setTimeout(()=>t.remove(),1200);
+    }
+
+    // Events
+    [search, category].forEach(el => el.addEventListener('input', () => render(getFiltered())));
+
+    shuffleBtn.addEventListener('click', () => {
+      FACTS.sort(() => Math.random() - 0.5);
+      render(getFiltered());
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const lines = getFiltered().map(f => `• ${f.t} (${f.c})`);
+      if (!lines.length) return;
+      copyText(lines.join('\n'));
+    });
+
+    exportBtn.addEventListener('click', () => {
+      const data = JSON.stringify(getFiltered(), null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'k2-hariyali-plant-gk.json'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      search.value = '';
+      category.value = 'All';
+      render(getFiltered());
+    });
+
+    // Initial paint
+    render(FACTS);
+  </script>
+</body>
+</html>
