@@ -64,29 +64,6 @@
 
     .empty{padding:24px;text-align:center;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
     footer{padding:30px 16px;text-align:center;color:#1a4a31}
-
-    .card-footer {
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.copy-small {
-  border: none;
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 13px;
-  background: var(--muted);
-  color: var(--dark);
-  box-shadow: var(--shadow);
-  transition: background 0.2s;
-}
-
-.copy-small:hover {
-  background: #d8f2e3;
-}
-
   </style>
 </head>
 <body>
@@ -314,16 +291,18 @@
       list.forEach((f, i) => {
         const card = document.createElement('article');
         card.className = 'card';
-     card.innerHTML = `
-  <div class="meta">
-    <span class="number">#${i + 1}</span>
-    <span class="cat">${f.c}</span>
-  </div>
-  <div class="text">${f.t}</div>
-  <div class="card-footer">
-    <button class="copy-small">📋 Copy</button>
-  </div>
-`;
+        card.innerHTML = `
+          <div class="meta">
+            <span class="number">#${i+1}</span>
+            <span class="cat">${f.c}</span>
+          </div>
+          <div class="text">${f.t}</div>
+          <button class="copy-small">📋 Copy</button>
+        `;
+        card.querySelector('.copy-small').addEventListener('click', () => copyText(f.t));
+        grid.appendChild(card);
+      });
+    }
 
     function getFiltered(){
       const q = search.value.trim().toLowerCase();
